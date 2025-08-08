@@ -1,10 +1,8 @@
-import React from "react";
-
-export default function Home() {
+export default function About() {
   return (
     <section>
       <div className="container">
-        <p>Home</p>
+        <p>About</p>
       </div>
     </section>
   );
