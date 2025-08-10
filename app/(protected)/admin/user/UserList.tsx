@@ -1,4 +1,4 @@
-import { getUsers } from "@/lib/data";
+import { getUsers } from "@/actions/user";
 
 export default async function UserList() {
   const users = await getUsers();
