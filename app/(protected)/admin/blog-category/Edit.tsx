@@ -1,12 +1,12 @@
 import InputForm from "@/components/form/InputForm";
-import { BlogCategoryProps } from "@/types/blog";
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useState, useTransition } from "react";
 import { FaCheck, FaSpinner, FaXmark } from "react-icons/fa6";
 import { useBlogCategory } from "./useBlogCategory";
+import { BlogCategory } from "@prisma/client";
 
 interface EditProps {
-  category: BlogCategoryProps;
+  category: BlogCategory;
   setIsEdit: Dispatch<SetStateAction<string | null>>;
 }
 
