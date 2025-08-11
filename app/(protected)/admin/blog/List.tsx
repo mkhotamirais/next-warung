@@ -22,7 +22,7 @@ export default function List({ blogs }: { blogs: BlogProps[] | undefined }) {
               <div>
                 <h3 className="h3">{blog.title}</h3>
                 <p>{blog.content}</p>
-                <p>{blog.category.name}</p>
+                <p>{blog.BlogCategory.name}</p>
               </div>
             </div>
             <div className="flex gap-2">
