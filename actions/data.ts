@@ -14,7 +14,7 @@ export const getBlogCategories = async () => {
 export const getBlogs = async () => {
   try {
     const blogs = await prisma.blog.findMany({
-      include: { category: { select: { name: true } } },
+      include: { BlogCategory: { select: { name: true } } },
       orderBy: { createdAt: "desc" },
     });
     return blogs;
@@ -25,7 +25,7 @@ export const getBlogs = async () => {
 
 export const getBlogById = async (id: string) => {
   try {
-    const blog = await prisma.blog.findUnique({ where: { id }, include: { category: { select: { name: true } } } });
+    const blog = await prisma.blog.findUnique({ where: { id }, include: { BlogCategory: { select: { name: true } } } });
     return blog;
   } catch (error) {
     console.log(error);

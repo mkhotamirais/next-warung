@@ -7,7 +7,7 @@ import z from "zod";
 export const POST = async (req: Request) => {
   const session = await auth();
   if (!session) return Response.json({ message: "Unauthorized" }, { status: 401 });
-  const authorId = session.user.id as string;
+  const userId = session.user.id as string;
 
   const formData = await req.formData();
 
@@ -36,7 +36,7 @@ export const POST = async (req: Request) => {
   }
 
   try {
-    await prisma.blog.create({ data: { title, slug, content, imageUrl, categoryId, authorId } });
+    await prisma.blog.create({ data: { title, slug, content, imageUrl, categoryId, userId } });
     return Response.json({ message: "Blog created successfully" });
   } catch (error) {
     console.log(error);

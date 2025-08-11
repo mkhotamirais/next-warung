@@ -29,7 +29,7 @@ export const PATCH = async (req: Request, { params }: { params: Promise<{ id: st
 
   const session = await auth();
   if (!session) return Response.json({ message: "Unauthorized" }, { status: 401 });
-  const authorId = session.user.id as string;
+  const userId = session.user.id as string;
 
   const formData = await req.formData();
 
@@ -63,7 +63,7 @@ export const PATCH = async (req: Request, { params }: { params: Promise<{ id: st
   }
 
   try {
-    await prisma.blog.update({ data: { title, slug, content, imageUrl, categoryId, authorId }, where: { id } });
+    await prisma.blog.update({ data: { title, slug, content, imageUrl, categoryId, userId }, where: { id } });
     return Response.json({ message: "Blog updated successfully" });
   } catch (error) {
     console.log(error);
