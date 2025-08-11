@@ -6,9 +6,16 @@ import z from "zod";
 
 export const DELETE = async (req: Request, { params }: { params: Promise<{ id: string }> }) => {
   const session = await auth();
-  if (!session) return Response.json({ message: "Unauthorized" }, { status: 401 });
+  if (!session || !session.user) return Response.json({ error: "Unauthorized" }, { status: 401 });
 
+  const userId = session.user.id as string;
   const id = (await params).id;
+  const role = session.user.role as string;
+
+  const blog = await prisma.blog.findUnique({ where: { id }, select: { userId: true } });
+  if (role !== "admin" && (role !== "editor" || blog?.userId !== userId)) {
+    return Response.json({ error: "Unauthorized" }, { status: 401 });
+  }
   const rawData = await req.json();
   const imageUrl = rawData.imageUrl;
 
@@ -25,11 +32,17 @@ export const DELETE = async (req: Request, { params }: { params: Promise<{ id: s
 };
 
 export const PATCH = async (req: Request, { params }: { params: Promise<{ id: string }> }) => {
-  const id = (await params).id;
-
   const session = await auth();
-  if (!session) return Response.json({ message: "Unauthorized" }, { status: 401 });
+  if (!session || !session.user) return Response.json({ message: "Unauthorized" }, { status: 401 });
+
   const userId = session.user.id as string;
+  const id = (await params).id;
+  const role = session.user.role as string;
+
+  const currentBlog = await prisma.blog.findUnique({ where: { id }, select: { userId: true, imageUrl: true } });
+  if (role !== "admin" && (role !== "editor" || currentBlog?.userId !== userId)) {
+    return Response.json({ error: "Unauthorized" }, { status: 401 });
+  }
 
   const formData = await req.formData();
 
@@ -51,8 +64,6 @@ export const PATCH = async (req: Request, { params }: { params: Promise<{ id: st
     return Response.json({ error: "Blog title already exists" }, { status: 409 });
   }
 
-  const currentBlog = await prisma.blog.findUnique({ where: { id }, select: { imageUrl: true } });
-
   let imageUrl = currentBlog?.imageUrl || "";
   if (file && file.size > 0) {
     if (currentBlog?.imageUrl) {
@@ -63,7 +74,7 @@ export const PATCH = async (req: Request, { params }: { params: Promise<{ id: st
   }
 
   try {
-    await prisma.blog.update({ data: { title, slug, content, imageUrl, categoryId, userId }, where: { id } });
+    await prisma.blog.update({ data: { title, slug, content, imageUrl, categoryId }, where: { id } });
     return Response.json({ message: "Blog updated successfully" });
   } catch (error) {
     console.log(error);

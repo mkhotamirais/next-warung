@@ -9,6 +9,7 @@ import { useBlog } from "../useBlog";
 import { FaTrash } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 import { BlogCategory } from "@prisma/client";
+import Msg from "@/components/Msg";
 
 interface CreateBlogFormProps {
   blogCategories: BlogCategory[];
@@ -21,7 +22,7 @@ export default function CreateBlogForm({ blogCategories }: CreateBlogFormProps) 
   const [image, setImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
-  const { errors, setErrors, setSuccessMsg, setErrorMsg } = useBlog();
+  const { errors, setErrors, successMsg, setSuccessMsg, errorMsg, setErrorMsg } = useBlog();
 
   const [pending, startTransition] = useTransition();
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -106,67 +107,71 @@ export default function CreateBlogForm({ blogCategories }: CreateBlogFormProps) 
   };
 
   return (
-    <form onSubmit={handleCreate}>
-      {/* image */}
-      <InputForm
-        ref={fileInputRef}
-        id="image"
-        label="Image"
-        type="file"
-        onChange={handleFileChange}
-        error={errors?.image?.errors}
-      />
+    <>
+      {successMsg ? <Msg msg={successMsg} /> : null}
+      {errorMsg ? <Msg msg={errorMsg} error /> : null}
+      <form onSubmit={handleCreate}>
+        {/* image */}
+        <InputForm
+          ref={fileInputRef}
+          id="image"
+          label="Image"
+          type="file"
+          onChange={handleFileChange}
+          error={errors?.image?.errors}
+        />
 
-      {imagePreview && (
-        <div className="relative">
-          <Image
-            src={imagePreview}
-            alt="preview"
-            width={500}
-            height={300}
-            className="w-full h-56 object-contain object-center bg-gray-100 rounded border border-gray-300"
-          />
-          <button
-            type="button"
-            onClick={handleRemoveImage}
-            aria-label="remove image"
-            className="absolute right-3 top-3 p-2 rounded border border-red-500 text-red-500"
-          >
-            <FaTrash />
-          </button>
-        </div>
-      )}
+        {imagePreview && (
+          <div className="relative">
+            <Image
+              src={imagePreview}
+              alt="preview"
+              width={500}
+              height={300}
+              className="w-full h-56 object-contain object-center bg-gray-100 rounded border border-gray-300"
+            />
+            <button
+              type="button"
+              onClick={handleRemoveImage}
+              aria-label="remove image"
+              className="absolute right-3 top-3 p-2 rounded border border-red-500 text-red-500"
+            >
+              <FaTrash />
+            </button>
+          </div>
+        )}
 
-      <InputForm
-        id="title"
-        label="Title"
-        type="text"
-        placeholder="Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        error={errors?.title?.errors}
-      />
-      <TextareaForm
-        id="content"
-        label="Content"
-        type="text"
-        placeholder="Content"
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        error={errors?.content?.errors}
-      />
-      <SelectForm
-        id="blogCategory"
-        label="Category"
-        options={blogCategoriesOptions}
-        value={categoryId || defaultCategory.id}
-        onChange={(e) => setCategoryId(e.target.value)}
-        error={errors?.categoryId?.errors}
-      />
+        <InputForm
+          id="title"
+          label="Title"
+          type="text"
+          placeholder="Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          error={errors?.title?.errors}
+        />
+        <TextareaForm
+          id="content"
+          label="Content"
+          type="text"
+          placeholder="Content"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          error={errors?.content?.errors}
+        />
+        <SelectForm
+          id="blogCategory"
+          label="Category"
+          options={blogCategoriesOptions}
+          value={categoryId || defaultCategory.id}
+          onChange={(e) => setCategoryId(e.target.value)}
+          error={errors?.categoryId?.errors}
+        />
 
-      <button type="submit" className="btn" disabled={pending}>
-        {pending ? "Creating..." : "Create"}
-      </button>
-    </form>
+        <button type="submit" className="btn" disabled={pending}>
+          {pending ? "Creating..." : "Create"}
+        </button>
+      </form>
+    </>
   );
 }

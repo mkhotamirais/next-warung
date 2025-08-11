@@ -9,7 +9,7 @@ export default async function Header() {
   const session = await auth();
 
   return (
-    <header className="h-16 bg-white border-b border-gray-200 z-50 sticky top-0">
+    <header className="h-16 bg-white border-b border-gray-200 z-30 sticky top-0">
       <div className="container flex items-center justify-between">
         <Logo />
         <div className="flex items-center gap-4">

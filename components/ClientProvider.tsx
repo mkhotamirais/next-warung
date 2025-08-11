@@ -1,9 +1,11 @@
 "use client";
 
+import { useGlobal } from "@/lib/useGlobal";
 import { useState, useEffect } from "react";
 
 export default function ClientProvider({ children }: { children: React.ReactNode }) {
   const [isMounted, setIsMounted] = useState(false);
+  const { openLayer, setOpenLayer, openMoreBlogOption, setOpenMoreBlogOption } = useGlobal();
 
   useEffect(() => {
     setIsMounted(true);
@@ -12,5 +14,18 @@ export default function ClientProvider({ children }: { children: React.ReactNode
   if (!isMounted) {
     return null;
   }
-  return <>{children}</>;
+  return (
+    <>
+      <div
+        onClick={() => {
+          setOpenLayer(false);
+          if (openMoreBlogOption) {
+            setOpenMoreBlogOption(null);
+          }
+        }}
+        className={`${openLayer ? "visible oacity-100" : "invisible opacity-0"} fixed inset-0 z-40`}
+      ></div>
+      {children}
+    </>
+  );
 }

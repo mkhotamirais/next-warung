@@ -1,10 +1,24 @@
 import Link from "next/link";
 import { Suspense } from "react";
 import List from "./List";
-import { getBlogs } from "@/actions/data";
+import { getBlogByUserId, getBlogs } from "@/actions/data";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 export default async function AdminBlog() {
+  const session = await auth();
+  if (!session || !session.user) redirect("/profile");
   const blogs = await getBlogs();
+
+  // let blogs = null;
+  // if (session?.user?.role === "admin") {
+  //   blogs = await getBlogs();
+  // }
+
+  // if (session?.user?.role === "editor") {
+  //   blogs = await getBlogByUserId();
+  // }
+
   return (
     <section className="py-4">
       <div className="container">

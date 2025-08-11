@@ -4,7 +4,8 @@ import { getBlogCategories } from "@/actions/data";
 
 export default async function BlogCategory() {
   const blogCategories = await getBlogCategories();
-  console.log(blogCategories);
+
+  if (!blogCategories?.length) return <h2 className="h2 container">No Blog Category</h2>;
 
   return (
     <section className="py-4">

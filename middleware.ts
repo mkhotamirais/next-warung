@@ -19,16 +19,18 @@ export async function middleware(request: NextRequest) {
     !pathname.startsWith("/.well-known") && // <-- Tambahkan ini
     !pathname.startsWith("/favicon.ico")
   ) {
-    const res = NextResponse.next();
     res.cookies.set("last_visited", pathname, { path: "/" });
-    return res;
   }
 
   if (!isLoggedIn && protectedRoutes.some((route) => pathname.startsWith(route))) {
     return NextResponse.redirect(new URL("/signin", request.url));
   }
 
-  if (isLoggedIn && role !== "admin" && pathname.startsWith("/admin")) {
+  if (isLoggedIn && role !== "admin" && role !== "editor" && pathname.startsWith("/admin")) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  if (isLoggedIn && role !== "admin" && pathname.startsWith("/admin/user")) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 

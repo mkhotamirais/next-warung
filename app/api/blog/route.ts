@@ -6,7 +6,8 @@ import z from "zod";
 
 export const POST = async (req: Request) => {
   const session = await auth();
-  if (!session) return Response.json({ message: "Unauthorized" }, { status: 401 });
+  if (!session || !session.user || (session.user.role !== "admin" && session.user.role !== "editor"))
+    return Response.json({ message: "Unauthorized" }, { status: 401 });
   const userId = session.user.id as string;
 
   const formData = await req.formData();

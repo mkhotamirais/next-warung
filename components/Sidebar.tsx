@@ -20,14 +20,23 @@ interface SidebarProps {
   title?: ReactNode;
   close?: boolean;
   className?: string;
+  ariaLabel?: string;
 }
 
-export default function Sidebar({ className, children, trigger, bg = "", title, close }: SidebarProps) {
+export default function Sidebar({
+  className,
+  children,
+  trigger,
+  bg = "",
+  title,
+  close,
+  ariaLabel = "menu",
+}: SidebarProps) {
   const [open, setOpen] = useState(false);
 
   return (
     <div className={`relative ${className}`}>
-      <button type="button" onClick={() => setOpen(!open)} aria-label="User Menu" className="flex items-center">
+      <button type="button" onClick={() => setOpen(!open)} aria-label={ariaLabel} className="flex items-center">
         {trigger}
       </button>
       <div

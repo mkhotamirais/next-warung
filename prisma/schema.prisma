@@ -27,7 +27,7 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  // products Product[]
+  // Products Product[]
   Blogs Blog[]
 }
 
@@ -70,7 +70,7 @@ model Blog {
   imageUrl     String // URL gambar blog
   BlogCategory BlogCategory @relation(fields: [categoryId], references: [id])
   categoryId   String
-  User         User         @relation(fields: [userId], references: [id])
+  User         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId       String
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
@@ -84,12 +84,15 @@ model Blog {
 //   price       Float
 //   stock       Int         @default(0)
 //   imageUrl    String?
-//   category    Category?   @relation(fields: [categoryId], references: [id])
-//   categoryId  String?
-//   tags        Tag[]       @relation("ProductTags", references: [id])
+
 //   createdAt   DateTime    @default(now())
 //   updatedAt   DateTime    @updatedAt
 
+//   userId String
+//   User User @relation(fields: [userId], references: [id], onDelete: Cascade)
+//   category    Category?   @relation(fields: [categoryId], references: [id])
+//   categoryId  String?
+//   tags        Tag[]       @relation("ProductTags", references: [id])
 //   CartItems   CartItem[]
 // }
 
