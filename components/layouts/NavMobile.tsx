@@ -1,6 +1,6 @@
 import React from "react";
 import Sidebar, { SidebarClose } from "@/components/Sidebar";
-import { FaBars } from "react-icons/fa6";
+import { FaBars, FaRightToBracket, FaWhatsapp } from "react-icons/fa6";
 import * as c from "@/lib/content";
 import Link from "next/link";
 import { Session } from "next-auth";
@@ -16,18 +16,21 @@ export default function NavMobile({ session }: { session: Session | null }) {
       <nav className="flex flex-col gap-1 mt-4">
         {c.mainMenu.map((item, i) => (
           <SidebarClose key={i} asChild>
-            <Link
-              href={item.url}
-              key={i}
-              className="py-2 px-3 block text-sm text-left text-gray-600 rounded hover:bg-gray-200"
-            >
+            <Link href={item.url} key={i} className="btn-gray">
               {item.label}
             </Link>
           </SidebarClose>
         ))}
+        <SidebarClose asChild>
+          <Link href="/contact" className="btn-border">
+            <FaWhatsapp className="text-lg" />
+            Hubungi Kami
+          </Link>
+        </SidebarClose>
         {!session?.user ? (
           <SidebarClose asChild>
-            <Link href="/signin" className="btn">
+            <Link href="/signin" className="btn text-center flex items-center justify-center gap-2">
+              <FaRightToBracket className="" />
               Sign In
             </Link>
           </SidebarClose>
