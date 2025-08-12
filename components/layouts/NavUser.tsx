@@ -6,6 +6,7 @@ import Image from "next/image";
 import { signOut } from "next-auth/react";
 import { adminMenu, editorMenu, userMenu } from "@/lib/content";
 import Link from "next/link";
+import Button from "../Button";
 
 export default function NavUser({ session }: { session: Session }) {
   const trigger = (
@@ -44,9 +45,9 @@ export default function NavUser({ session }: { session: Session }) {
           </SidebarClose>
         ))}
         <SidebarClose asChild>
-          <button type="button" className="btn w-full" onClick={() => signOut({ redirectTo: "/signin" })}>
+          <Button type="button" onClick={() => signOut({ redirectTo: "/signin" })}>
             Sign Out
-          </button>
+          </Button>
         </SidebarClose>
       </nav>
     </Sidebar>

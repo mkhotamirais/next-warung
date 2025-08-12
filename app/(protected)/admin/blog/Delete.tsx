@@ -5,6 +5,7 @@ import { useTransition } from "react";
 import { useBlog } from "./useBlog";
 import { BlogProps } from "@/types/types";
 import Modal, { ModalClose } from "@/components/Modal";
+import Button from "@/components/Button";
 
 interface DeleteProps {
   blog: BlogProps;
@@ -38,20 +39,27 @@ export default function Delete({ blog, closeMoreOptions }: DeleteProps) {
     closeMoreOptions();
   };
   return (
-    <Modal trigger={<div className="btn-danger w-full">Delete</div>} title="Delete Blog">
+    <Modal
+      trigger={
+        <Button as={"div"} variant="danger">
+          Delete
+        </Button>
+      }
+      title="Delete Blog"
+    >
       <p>
         Delete <b>{blog.title}</b>, this action cannot be undone, are you sre?
       </p>
       <div className="flex gap-2 mt-4">
         <ModalClose asChild>
-          <button type="button" disabled={pending} className="btn-danger" onClick={handleDelete}>
+          <Button type="button" variant="danger" disabled={pending} onClick={handleDelete}>
             {pending ? "loading..." : "Delete"}
-          </button>
+          </Button>
         </ModalClose>
         <ModalClose asChild>
-          <button type="button" className="btn-gray">
+          <Button type="button" variant="gray">
             Cancel
-          </button>
+          </Button>
         </ModalClose>
       </div>
     </Modal>

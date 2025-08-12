@@ -1,12 +1,12 @@
-import { getBlogById, getBlogCategories } from "@/actions/data";
+import { getBlogBySlug, getBlogCategories } from "@/actions/data";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import EditBlogForm from "./EditBlogForm";
 
-export default async function EditBlog({ params }: { params: Promise<{ id: string }> }) {
-  const id = (await params).id;
+export default async function EditBlog({ params }: { params: Promise<{ slug: string }> }) {
+  const slug = (await params).slug;
 
-  const [blogCategories, blog] = await Promise.all([getBlogCategories(), getBlogById(id)]);
+  const [blogCategories, blog] = await Promise.all([getBlogCategories(), getBlogBySlug(slug)]);
 
   if (!blogCategories?.length || !blog) redirect("/admin/blog-category");
 

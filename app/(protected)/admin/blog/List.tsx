@@ -8,6 +8,7 @@ import Link from "next/link";
 import { BlogProps } from "@/types/types";
 import { HiDotsVertical } from "react-icons/hi";
 import { useGlobal } from "@/lib/useGlobal";
+import Button from "@/components/Button";
 
 export default function List({ blogs }: { blogs: BlogProps[] | undefined | null }) {
   const { setOpenLayer, openMoreBlogOption, setOpenMoreBlogOption } = useGlobal();
@@ -65,9 +66,9 @@ export default function List({ blogs }: { blogs: BlogProps[] | undefined | null 
                     openMoreBlogOption === blog.id ? "visible opacity-100" : "invisible opacity-0"
                   } absolute flex flex-col gap-1 top-full right-0 bg-white border border-gray-300 rounded p-2 z-50`}
                 >
-                  <Link onClick={closeMoreOptions} href={`/admin/blog/edit/${blog.id}`} className="btn-gray w-full">
+                  <Button as={Link} onClick={closeMoreOptions} href={`/admin/blog/edit/${blog.slug}`}>
                     Edit
-                  </Link>
+                  </Button>
                   <Delete blog={blog} closeMoreOptions={closeMoreOptions} />
                 </div>
               </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { signInCredential } from "@/actions/auth";
+import Button from "@/components/Button";
 import InputForm from "@/components/form/InputForm";
 import { useActionState } from "react";
 
@@ -26,9 +27,9 @@ export default function SigninForm() {
         error={state?.error?.properties?.password?.errors}
       />
 
-      <button type="submit" className="btn w-full" disabled={isPending}>
+      <Button type="submit" disabled={isPending} className="w-full">
         {isPending ? "Signing In..." : "Sign In"}
-      </button>
+      </Button>
     </form>
   );
 }

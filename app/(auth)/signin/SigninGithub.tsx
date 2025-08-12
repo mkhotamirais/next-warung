@@ -2,6 +2,7 @@ import React from "react";
 import { FaGithub } from "react-icons/fa6";
 import { signIn } from "@/auth";
 import { cookies } from "next/headers";
+import Button from "@/components/Button";
 
 export default function SigninGithub() {
   return (
@@ -13,9 +14,9 @@ export default function SigninGithub() {
         await signIn("github", { redirectTo: lastUrl });
       }}
     >
-      <button type="submit" className="btn flex items-center w-full gap-2 justify-center">
-        <FaGithub /> Login With Gihub
-      </button>
+      <Button type="submit" className="w-full" icon={<FaGithub />}>
+        Login With Gihub
+      </Button>
     </form>
   );
 }

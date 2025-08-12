@@ -10,6 +10,7 @@ import { FaTrash } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
 import { BlogCategory } from "@prisma/client";
 import Msg from "@/components/Msg";
+import Button from "@/components/Button";
 
 interface CreateBlogFormProps {
   blogCategories: BlogCategory[];
@@ -168,9 +169,9 @@ export default function CreateBlogForm({ blogCategories }: CreateBlogFormProps) 
           error={errors?.categoryId?.errors}
         />
 
-        <button type="submit" className="btn" disabled={pending}>
+        <Button type="submit" disabled={pending}>
           {pending ? "Creating..." : "Create"}
-        </button>
+        </Button>
       </form>
     </>
   );

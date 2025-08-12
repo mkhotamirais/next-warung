@@ -4,6 +4,7 @@ import InputForm from "@/components/form/InputForm";
 import { useRouter } from "next/navigation";
 import { useBlogCategory } from "./useBlogCategory";
 import { useState, useTransition } from "react";
+import Button from "@/components/Button";
 
 export default function Create() {
   const { setSuccessMsg, setErrorMsg, errors, setErrors } = useBlogCategory();
@@ -52,9 +53,9 @@ export default function Create() {
           onChange={(e) => setName(e.target.value)}
           error={errors?.name?.errors}
         />
-        <button type="submit" className="btn">
-          {pending ? "Creating..." : "Create Blog Category"}
-        </button>
+        <Button type="submit" variant="primary" disabled={pending}>
+          {pending ? "Creating..." : "Create"}
+        </Button>
       </form>
     </>
   );

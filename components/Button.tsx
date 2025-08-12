@@ -3,7 +3,6 @@
 import { ComponentPropsWithoutRef, ElementType, ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
 import clsx from "clsx";
-import { FaWhatsapp } from "react-icons/fa6";
 
 type Variant = "primary" | "outline" | "gray" | "danger";
 
@@ -36,7 +35,7 @@ export default function Button<T extends ElementType = "button">({
     <Component
       className={twMerge(
         clsx(
-          "inline-flex items-center justify-center px-4 py-2 rounded text-sm transition-colors",
+          "inline-flex items-center justify-center px-4 py-2 rounded text-sm transition-colors disabled:opacity-50",
           variantClasses[variant],
           className
         )

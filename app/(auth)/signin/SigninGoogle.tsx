@@ -2,6 +2,7 @@ import React from "react";
 import { FaG } from "react-icons/fa6";
 import { signIn } from "@/auth";
 import { cookies } from "next/headers";
+import Button from "@/components/Button";
 
 export default function SigninGoogle() {
   return (
@@ -13,9 +14,9 @@ export default function SigninGoogle() {
         await signIn("google", { redirectTo: lastUrl });
       }}
     >
-      <button type="submit" className="btn flex items-center w-full gap-2 justify-center">
-        <FaG /> Login With Google
-      </button>
+      <Button type="submit" className="w-full" icon={<FaG />}>
+        Login With Google
+      </Button>
     </form>
   );
 }

@@ -11,6 +11,7 @@ import { BlogCategory } from "@prisma/client";
 import { useBlog } from "../../useBlog";
 import Msg from "@/components/Msg";
 import { BlogProps } from "@/types/types";
+import Button from "@/components/Button";
 
 interface UpdateBlogFormProps {
   blogCategories: BlogCategory[];
@@ -175,9 +176,9 @@ export default function EditBlogForm({ blogCategories, blog }: UpdateBlogFormPro
           error={errors?.categoryId?.errors}
         />
 
-        <button type="submit" className="btn" disabled={pending}>
+        <Button type="submit" disabled={pending}>
           {pending ? "Updating..." : "Update"}
-        </button>
+        </Button>
       </form>
     </>
   );

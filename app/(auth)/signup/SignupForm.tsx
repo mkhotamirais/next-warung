@@ -1,6 +1,7 @@
 "use client";
 
 import { signUp } from "@/actions/auth";
+import Button from "@/components/Button";
 import InputForm from "@/components/form/InputForm";
 import { useActionState } from "react";
 
@@ -40,9 +41,9 @@ export default function SignupForm() {
         error={state?.error?.properties?.confirmPassword?.errors}
       />
 
-      <button type="submit" className="btn w-full" disabled={isPending}>
+      <Button type="submit" className="w-full" disabled={isPending}>
         {isPending ? "Signing Up..." : "Sign Up"}
-      </button>
+      </Button>
     </form>
   );
 }
