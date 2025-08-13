@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import * as c from "@/lib/content";
+import { menu as m } from "@/lib/content";
 import NavUser from "./NavUser";
 import { Session } from "next-auth";
 import { usePathname } from "next/navigation";
@@ -16,7 +16,7 @@ export default function NavDesktop({ session }: { session: Session | null }) {
   return (
     <div className="hidden md:flex">
       <nav className="flex items-center gap-1">
-        {c.mainMenu.map((item) => (
+        {m.mainMenu.map((item) => (
           <Link
             href={item.url}
             key={item.label}

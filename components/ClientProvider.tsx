@@ -1,6 +1,7 @@
 "use client";
 
 import { useGlobal } from "@/lib/useGlobal";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 
 export default function ClientProvider({ children }: { children: React.ReactNode }) {
@@ -12,7 +13,14 @@ export default function ClientProvider({ children }: { children: React.ReactNode
   }, []);
 
   if (!isMounted) {
-    return null;
+    return (
+      <div className="min-h-screen w-full flex items-center justify-center">
+        <div className="flex flex-col items-center">
+          <Image src="/logo-warungota.png" width={100} height={100} alt="logo" className="animate-bounce size-16" />
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
   }
   return (
     <>

@@ -17,8 +17,10 @@ export default function BlogCard1({ blog, content = true }: { blog: BlogProps; c
           className="w-full h-56 rounded-t object-cover object-center bg-gray-100"
         />
       </Link>
-      <div className="mt-4 min-h-48 flex flex-col space-y-2">
-        <h3 className="h3 mb-2">{smartTrim(blog.title, 56)}</h3>
+      <div className={`${content ? "min-h-48" : "min-h-auto"} mt-3 flex flex-col space-y-2`}>
+        <Link href={`/blog/${blog.slug}`} className="hover:underline">
+          <h3 className="h3 mb-1">{smartTrim(blog.title, 56)}</h3>
+        </Link>
         <div className="flex flex-wrap gap-2 items-center text-sm text-gray-600">
           <Link href="" className="link">
             {blog.BlogCategory.name}

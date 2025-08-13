@@ -1,7 +1,7 @@
 import React from "react";
 import Sidebar, { SidebarClose } from "@/components/Sidebar";
 import { FaBars, FaRightToBracket, FaWhatsapp } from "react-icons/fa6";
-import * as c from "@/lib/content";
+import { menu as m } from "@/lib/content";
 import Link from "next/link";
 import { Session } from "next-auth";
 
@@ -14,7 +14,7 @@ export default function NavMobile({ session }: { session: Session | null }) {
   return (
     <Sidebar trigger={trigger} className="md:hidden">
       <nav className="flex flex-col gap-1 mt-4">
-        {c.mainMenu.map((item, i) => (
+        {m.mainMenu.map((item, i) => (
           <SidebarClose key={i} asChild>
             <Link href={item.url} key={i} className="btn-gray">
               {item.label}

@@ -4,7 +4,7 @@ import { Session } from "next-auth";
 import Sidebar, { SidebarClose } from "@/components/Sidebar";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
-import { adminMenu, editorMenu, userMenu } from "@/lib/content";
+import { menu as m } from "@/lib/content";
 import Link from "next/link";
 import Button from "../Button";
 
@@ -27,11 +27,11 @@ export default function NavUser({ session }: { session: Session }) {
     </>
   );
 
-  let menu = userMenu;
+  let menu = m.userMenu;
   if (session?.user?.role === "admin") {
-    menu = [...userMenu, ...editorMenu, ...adminMenu];
+    menu = [...m.userMenu, ...m.editorMenu, ...m.adminMenu];
   } else if (session?.user?.role === "editor") {
-    menu = [...userMenu, ...editorMenu];
+    menu = [...m.userMenu, ...m.editorMenu];
   }
 
   return (
