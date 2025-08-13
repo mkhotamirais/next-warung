@@ -8,7 +8,7 @@ import { Session } from "next-auth";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import Button from "../Button";
-import { FaRightToBracket, FaWhatsapp } from "react-icons/fa6";
+import { FaRightToBracket } from "react-icons/fa6";
 
 export default function NavDesktop({ session }: { session: Session | null }) {
   const pathName = usePathname();
@@ -28,10 +28,10 @@ export default function NavDesktop({ session }: { session: Session | null }) {
             {item.label}
           </Link>
         ))}
-        <Button as={Link} href="/contact" variant="outline" icon={<FaWhatsapp className="text-lg " />} className="mx-2">
+        {/* <Button as={Link} href="/contact" variant="outline" icon={<FaWhatsapp className="text-lg " />} className="mx-2">
           Hubungi Kami
-        </Button>
-        <div className="">
+        </Button> */}
+        {/* <div className="">
           {session?.user ? (
             <NavUser session={session} />
           ) : (
@@ -39,7 +39,7 @@ export default function NavDesktop({ session }: { session: Session | null }) {
               Sign In
             </Button>
           )}
-        </div>
+        </div> */}
       </nav>
     </div>
   );

@@ -21,7 +21,32 @@ export const menu = {
   ],
 };
 
-export const blog = [
-  { title: "Blog", description: "Blog Description of Next Warung" },
-  //
-];
+export const content = {
+  home: {
+    hero: {
+      title: "Belanja dan Fotokopi dalam Satu Tempat",
+      description:
+        "WarungOta menyediakan sembako, ATK, serta layanan fotokopi, cetak dokumen dan foto, laminating, transfer, tarik tunai, isi saldo, pulsa, dan token listrik.",
+    },
+    blog: {
+      title: "Blog Terbaru",
+      description: "Lorem ipsum dolor sit amet",
+    },
+  },
+  blog: {
+    title: "Blog",
+    description: "Lorem ipsum dolor sit amet",
+  },
+  product: {
+    title: "Product",
+    description: "Lorem ipsum dolor sit amet",
+  },
+  about: {
+    title: "About",
+    description: "Lorem ipsum dolor sit amet",
+  },
+  contact: {
+    title: "Contact",
+    description: "Lorem ipsum dolor sit amet",
+  },
+};

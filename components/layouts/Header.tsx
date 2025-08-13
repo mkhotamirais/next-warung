@@ -4,6 +4,9 @@ import NavDesktop from "./NavDesktop";
 import NavMobile from "./NavMobile";
 import { auth } from "@/auth";
 import NavUser from "./NavUser";
+import { FaMagnifyingGlass, FaRightToBracket } from "react-icons/fa6";
+import Button from "../Button";
+import Link from "next/link";
 
 export default async function Header() {
   const session = await auth();
@@ -14,7 +17,19 @@ export default async function Header() {
         <Logo />
         <div className="flex items-center gap-4">
           <NavDesktop session={session} />
-          <div className="md:hidden">{session?.user ? <NavUser session={session} /> : null}</div>
+          <button type="button" aria-label="search">
+            <FaMagnifyingGlass />
+          </button>
+          {/* <div className="">{session?.user ? <NavUser session={session} /> : null}</div> */}
+          <div className="">
+            {session?.user ? (
+              <NavUser session={session} />
+            ) : (
+              <Button as={Link} href="/signin" icon={<FaRightToBracket />}>
+                Sign In
+              </Button>
+            )}
+          </div>
           <NavMobile session={session} />
         </div>
       </div>

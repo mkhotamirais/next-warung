@@ -4,6 +4,7 @@ import { FaBars, FaRightToBracket, FaWhatsapp } from "react-icons/fa6";
 import { menu as m } from "@/lib/content";
 import Link from "next/link";
 import { Session } from "next-auth";
+import Button from "../Button";
 
 export default function NavMobile({ session }: { session: Session | null }) {
   const trigger = (
@@ -16,16 +17,21 @@ export default function NavMobile({ session }: { session: Session | null }) {
       <nav className="flex flex-col gap-1 mt-4">
         {m.mainMenu.map((item, i) => (
           <SidebarClose key={i} asChild>
-            <Link href={item.url} key={i} className="btn-gray">
+            <Button as={Link} href={item.url} key={i} variant="gray" className="w-full justify-start">
               {item.label}
-            </Link>
+            </Button>
           </SidebarClose>
         ))}
         <SidebarClose asChild>
-          <Link href="/contact" className="btn-border">
-            <FaWhatsapp className="text-lg" />
+          <Button
+            as={Link}
+            href="/contact"
+            variant="outline"
+            icon={<FaWhatsapp className="text-lg" />}
+            className="w-full"
+          >
             Hubungi Kami
-          </Link>
+          </Button>
         </SidebarClose>
         {!session?.user ? (
           <SidebarClose asChild>
