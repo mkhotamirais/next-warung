@@ -10,7 +10,7 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 
 export async function generateStaticParams() {
-  const slugs = await prisma.blog.findMany({ select: { slug: true } });
+  const slugs = await prisma.blog.findMany({ select: { slug: true }, take: 10 });
   return slugs.map((slug) => ({ slug: slug.slug }));
 }
 
@@ -35,7 +35,7 @@ export default async function BlogId({ params }: { params: Promise<{ slug: strin
             </div>
 
             <Image
-              src={blog.imageUrl || ""}
+              src={blog.imageUrl || "/logo-warungota.png"}
               alt={blog.title}
               width={500}
               height={500}
