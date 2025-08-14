@@ -1,5 +1,3 @@
-"use client";
-
 import Button from "@/components/Button";
 // import SearchForm from "@/components/layouts/SearchForm";
 import Link from "next/link";
