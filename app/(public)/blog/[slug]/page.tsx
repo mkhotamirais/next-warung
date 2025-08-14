@@ -34,14 +34,14 @@ export default async function BlogId({ params }: { params: Promise<{ slug: strin
               <span>{moment(blog.createdAt).fromNow()}</span>
             </div>
 
-            <Image
+            {/* <Image
               src={blog.imageUrl || "/logo-warungota.png"}
               alt={blog.title}
               width={500}
               height={500}
               className="w-full h-72 object-cover object-center"
               priority
-            />
+            /> */}
             <p className="mt-4">{blog.content}</p>
           </div>
           <div className="md:w-1/3 border">right</div>
