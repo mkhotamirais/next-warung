@@ -1,9 +1,9 @@
 "use client";
 
 import Button from "@/components/Button";
+// import SearchForm from "@/components/layouts/SearchForm";
 import Link from "next/link";
 import React from "react";
-import { FaMagnifyingGlass } from "react-icons/fa6";
 
 export default function HeroSection() {
   return (
@@ -15,6 +15,8 @@ export default function HeroSection() {
           tarik tunai, isi saldo, pulsa, dan token listrik.
         </p>
 
+        {/* <SearchForm /> */}
+
         <div className="flex flex-col sm:flex-row gap-2">
           <Button as={Link} href="/shop" className="text-base rounded-lg w-36">
             Semua Produk
@@ -23,21 +25,6 @@ export default function HeroSection() {
             Hubungi Kami
           </Button>
         </div>
-
-        <form action="" className="relative w-full sm:w-80">
-          <input
-            type="search"
-            placeholder="Cari Produk.."
-            className="bg-white w-full py-3 px-4 pr-10 rounded-full border border-gray-400"
-          />
-          <button
-            type="submit"
-            className="absolute border-black right-0 top-0 w-12 h-full flex justify-center items-center rounded-full"
-            aria-label="Search Produt"
-          >
-            <FaMagnifyingGlass />
-          </button>
-        </form>
       </div>
     </section>
   );
