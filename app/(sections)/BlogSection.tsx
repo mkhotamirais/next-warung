@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import { content as c } from "@/lib/content";
 import BlogCard1 from "@/components/BlogCard1";
 import { getBlogs } from "@/actions/data";

@@ -3,6 +3,8 @@ import BlogCard2 from "@/components/BlogCard2";
 import BlogCard1 from "@/components/BlogCard1";
 import { getBlogs } from "@/actions/data";
 
+export const revalidate = 60;
+
 export default async function List() {
   const blogs = await getBlogs();
   return (
