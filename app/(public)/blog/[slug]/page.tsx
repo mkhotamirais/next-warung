@@ -1,11 +1,18 @@
+export const revalidate = 60;
+export const dynamicParams = true; // izinkan slug baru di-generate on demand (opsional)
+
 import React from "react";
 import { notFound } from "next/navigation";
 import { getBlogBySlug } from "@/actions/data";
 import Image from "next/image";
 import moment from "moment";
 import Link from "next/link";
+import { prisma } from "@/lib/prisma";
 
-export const revalidate = 60;
+export async function generateStaticParams() {
+  const slugs = await prisma.blog.findMany({ select: { slug: true } });
+  return slugs.map((slug) => ({ slug: slug.slug }));
+}
 
 export default async function BlogId({ params }: { params: Promise<{ slug: string }> }) {
   const slug = (await params).slug;
@@ -28,7 +35,7 @@ export default async function BlogId({ params }: { params: Promise<{ slug: strin
             </div>
 
             <Image
-              src={blog.imageUrl}
+              src={blog.imageUrl || ""}
               alt={blog.title}
               width={500}
               height={500}

@@ -2,13 +2,11 @@ export const revalidate = 60;
 
 import { content as c } from "@/lib/content";
 import BlogCard1 from "@/components/BlogCard1";
-import { getBlogs } from "@/actions/data";
+import { BlogProps } from "@/types/types";
 
 const { title, description } = c.blog;
 
-export default async function BlogSection() {
-  const blogs = await getBlogs(3);
-
+export default async function BlogSection({ blogs }: { blogs: BlogProps[] | undefined | null }) {
   return (
     <section className="py-12">
       <div className="container">
