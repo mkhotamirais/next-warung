@@ -1,5 +1,4 @@
 import { content as c } from "@/lib/content";
-import { getBlogs } from "@/actions/data";
 import List from "./List";
 import { Suspense } from "react";
 import Heroes from "@/components/Heroes";
@@ -9,8 +8,7 @@ const { title, description } = c.blog;
 
 export const metadata: Metadata = { title, description };
 
-export default async function Blog() {
-  const blogs = await getBlogs();
+export default function Blog() {
   return (
     <>
       <Heroes title={title} description={description} />
@@ -18,8 +16,8 @@ export default async function Blog() {
         <div className="container">
           <div className="grid lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
-              <Suspense fallback={<div>Loading...</div>}>
-                <List blogs={blogs} />
+              <Suspense fallback={<div>Loading Blog...</div>}>
+                <List />
               </Suspense>
             </div>
             <div>right</div>

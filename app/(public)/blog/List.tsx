@@ -1,9 +1,10 @@
-import { BlogProps } from "@/types/types";
 import React from "react";
 import BlogCard2 from "@/components/BlogCard2";
 import BlogCard1 from "@/components/BlogCard1";
+import { getBlogs } from "@/actions/data";
 
-export default function List({ blogs }: { blogs: BlogProps[] | undefined | null }) {
+export default async function List() {
+  const blogs = await getBlogs();
   return (
     <div className="">
       <div className="hidden sm:block">
