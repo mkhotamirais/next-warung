@@ -15,6 +15,7 @@ export default function BlogCard1({ blog, content = true }: { blog: BlogProps; c
           width={500}
           height={500}
           className="w-full h-56 rounded-t object-cover object-center bg-gray-100"
+          priority
         />
       </Link>
       <div className={`${content ? "min-h-48" : "min-h-auto"} mt-3 flex flex-col space-y-2`}>
