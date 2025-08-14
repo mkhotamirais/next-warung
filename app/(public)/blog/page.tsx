@@ -7,10 +7,7 @@ import { Metadata } from "next";
 
 const { title, description } = c.blog;
 
-export const metadata: Metadata = {
-  title,
-  description,
-};
+export const metadata: Metadata = { title, description };
 
 export default async function Blog() {
   const blogs = await getBlogs();

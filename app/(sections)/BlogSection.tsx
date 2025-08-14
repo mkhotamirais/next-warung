@@ -1,12 +1,14 @@
+"use client";
+
 import { content as c } from "@/lib/content";
-import { getBlogs } from "@/actions/data";
 import BlogCard1 from "@/components/BlogCard1";
 import { Suspense } from "react";
+import { BlogProps } from "@/types/types";
 
 const { title, description } = c.blog;
 
-export default async function BlogSection() {
-  const blogs = await getBlogs(3);
+export default function BlogSection({ blogs }: { blogs: BlogProps[] | undefined | null }) {
+  if (!blogs) return null;
 
   return (
     <section className="py-12">
